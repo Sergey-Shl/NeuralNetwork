@@ -10,59 +10,16 @@ import android.graphics.Matrix;
 
 public class TrimImage {
 
-    public TrimImage() {
-
-    }
-
-    public static Bitmap Trim(Bitmap bmp) {
-        int imgHeight = bmp.getHeight();
-        int imgWidth = bmp.getWidth();
-
-        int widthStart = imgWidth;
-        int widthEnd = 0;
-        for (int i = 0; i < imgHeight; i++) {
-            for (int j = imgWidth - 1; j >=0 ; j--) {
-                if(bmp.getPixel(j, i) != Color.TRANSPARENT && j < widthStart)
-                {
-                    widthStart = j;
-                }
-                if(bmp.getPixel(j, i) != Color.TRANSPARENT && j > widthEnd) {
-                    widthEnd = j;
-                    break;
-                }
-            }
-        }
-
-        int heightStart = imgHeight;
-        int heightEnd = 0;
-        for (int i = 0; i < imgWidth; i++) {
-            for (int j = imgHeight - 1; j >= 0 ; j--) {
-                if(bmp.getPixel(i, j) != Color.TRANSPARENT && j < heightStart) {
-                    heightStart = j;
-                }
-                if(bmp.getPixel(i, j) != Color.TRANSPARENT && j > heightEnd) {
-                    heightEnd = j;
-                    break;
-                }
-            }
-        }
-
-        int finalWidth = widthEnd - widthStart;
-        int finalHeight = heightEnd - heightStart;
-
-        return Bitmap.createBitmap(bmp, widthStart, heightStart, finalWidth, finalHeight);
-    }
-
     public static Bitmap TrimBitmap(Bitmap bmp) {
+        final int step = 10;
         int imgHeight = bmp.getHeight();
         int imgWidth  = bmp.getWidth();
 
-
         //TRIM WIDTH - LEFT
         int startWidth = 0;
-        for(int x = 0; x < imgWidth; x++) {
+        for(int x = 0; x < imgWidth; x = x + step) {
             if (startWidth == 0) {
-                for (int y = 0; y < imgHeight; y++) {
+                for (int y = 0; y < imgHeight; y = y + step) {
                     if (bmp.getPixel(x, y) != Color.TRANSPARENT) {
                         startWidth = x;
                         break;
@@ -74,9 +31,9 @@ public class TrimImage {
 
         //TRIM WIDTH - RIGHT
         int endWidth  = 0;
-        for(int x = imgWidth - 1; x >= 0; x--) {
+        for(int x = imgWidth - 1; x >= 0; x = x - step) {
             if (endWidth == 0) {
-                for (int y = 0; y < imgHeight; y++) {
+                for (int y = 0; y < imgHeight; y = y + step) {
                     if (bmp.getPixel(x, y) != Color.TRANSPARENT) {
                         endWidth = x;
                         break;
@@ -89,9 +46,9 @@ public class TrimImage {
 
         //TRIM HEIGHT - TOP
         int startHeight = 0;
-        for(int y = 0; y < imgHeight; y++) {
+        for(int y = 0; y < imgHeight; y = y + step) {
             if (startHeight == 0) {
-                for (int x = 0; x < imgWidth; x++) {
+                for (int x = 0; x < imgWidth; x = x + step) {
                     if (bmp.getPixel(x, y) != Color.TRANSPARENT) {
                         startHeight = y;
                         break;
@@ -104,9 +61,9 @@ public class TrimImage {
 
         //TRIM HEIGHT - BOTTOM
         int endHeight = 0;
-        for(int y = imgHeight - 1; y >= 0; y--) {
+        for(int y = imgHeight - 1; y >= 0; y = y - step) {
             if (endHeight == 0 ) {
-                for (int x = 0; x < imgWidth; x++) {
+                for (int x = 0; x < imgWidth; x = x + step) {
                     if (bmp.getPixel(x, y) != Color.TRANSPARENT) {
                         endHeight = y;
                         break;

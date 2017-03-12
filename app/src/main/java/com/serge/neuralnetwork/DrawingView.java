@@ -33,10 +33,6 @@ public class DrawingView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        if (clearCanvas) {
-            path.reset();
-            clearCanvas = false;
-        }
         canvas.drawPath(path, paint);
         setDrawingCacheEnabled(true);
     }
@@ -64,14 +60,9 @@ public class DrawingView extends View {
 
     public boolean Clear()
     {
-        //Toast.makeText(getContext(), "Clear", Toast.LENGTH_SHORT).show();
-        clearCanvas = true;
+        path.reset();
         invalidate();
         return true;
     }
 
-    /*public Bitmap getBitmap()
-    {
-
-    }*/
 }

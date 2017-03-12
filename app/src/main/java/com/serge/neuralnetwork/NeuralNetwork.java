@@ -37,6 +37,11 @@ public class NeuralNetwork {
         neurons.add(new Neuron());
     }
 
+    public void addNeuron(String name)
+    {
+        neurons.add(new Neuron(name));
+    }
+
     public void TrainNeuron(int id, Double[][] arr)
     {
         if(id > neurons.size())
@@ -44,5 +49,19 @@ public class NeuralNetwork {
         if(id == neurons.size())
             addNeuron();
         neurons.get(id).Train(arr);
+    }
+
+    public void TrainNeuron(int id, Double[][] arr, String name)
+    {
+        if(id > neurons.size())
+            return;
+        if(id == neurons.size())
+            addNeuron(name);
+        neurons.get(id).Train(arr);
+    }
+
+    public String getNeuronName(int id)
+    {
+        return neurons.get(id).getNeuronName();
     }
 }

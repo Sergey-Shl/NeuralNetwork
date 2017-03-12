@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             EditText editText = (EditText) findViewById(R.id.neuron_id);
+            TextView textView = (TextView) findViewById(R.id.neuron_name);
             DrawingView drawingView = (DrawingView) findViewById(R.id.drawing_view);
             ImageView imageView = (ImageView) findViewById(R.id.image_view);
             Bitmap bm = null;
@@ -60,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                     bm = TrimImage.getResizedBitmap(bm, 16, 16);
                     imageView.setImageBitmap(bm);
 
-                    neuralNetwork.TrainNeuron(Integer.parseInt(String.valueOf(editText.getText())), convertBitmapToArr(bm));
+                    neuralNetwork.TrainNeuron(Integer.parseInt(String.valueOf(editText.getText())), convertBitmapToArr(bm), String.valueOf(textView.getText()));
                     drawingView.Clear();
                     break;
                 case R.id.btn3:
@@ -71,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
                     Integer id = neuralNetwork.FindBestSolution(convertBitmapToArr(bm));
                     drawingView.Clear();
-                    Toast.makeText(getApplicationContext(), "" + id, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), neuralNetwork.getNeuronName(id), Toast.LENGTH_SHORT).show();
                     break;
                 default:
                     break;
