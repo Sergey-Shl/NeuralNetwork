@@ -1,5 +1,6 @@
 package com.serge.neuralnetwork;
 
+import android.graphics.Bitmap;
 import android.util.Log;
 
 import javax.xml.transform.Source;
@@ -9,26 +10,21 @@ import javax.xml.transform.Source;
  */
 
 public class Neuron {
-    private final Integer _SIZE = 15;
+    private final Integer _SIZE = 16;
+    private static Integer idCounter = 0;
 
-    private Integer result;
-    private Integer[][] weight;
-    private Integer trainigCounter;
+    private Double[][] weight;
+    private Integer trainCounter;
     private Integer neuronId;
 
-    public Neuron(int id) {
-        weight = new Integer[_SIZE][_SIZE];
-        neuronId = id;
+    public Neuron() {
+        weight = new Double[_SIZE][_SIZE];
+        neuronId = idCounter;
+        idCounter++;
     }
 
-    public Neuron(int id, int num) {
-        weight = new Integer[_SIZE][_SIZE];
-        neuronId = id;
-        Train(num);
-    }
-
-    int Compare(Integer[][] source) {
-        result = 0;
+    double Compare(Double[][] source) {
+        Double result = 0.0;
         for (int i = 0; i < _SIZE; i++) {
             for (int j = 0; j < _SIZE; j++) {
                 result += 1 - Math.abs(weight[i][j] - source[i][j]);
@@ -37,25 +33,38 @@ public class Neuron {
         return result;
     }
 
-    public Boolean Train(Integer[][] source) {
+    double Compare(Bitmap bitmap) {
+        Double result = 0.0;
         for (int i = 0; i < _SIZE; i++) {
             for (int j = 0; j < _SIZE; j++) {
+                result += 1 - Math.abs(weight[i][j] - bitmap.getPixel(j, i));
+            }
+        }
+        return result;
+    }
+
+    public Boolean Train(Double[][] source) {
+        //Double d = 1.0 / trainCounter;
+        for (int i = 0; i < _SIZE; i++) {
+            for (int j = 0; j < _SIZE; j++) {
+                //weight[i][j] += 2 * (source[i][j] - 0.5f) / countTrainig;
                 weight[i][j] = source[i][j];
             }
         }
         return true;
     }
 
-    public Boolean Train(Integer typeNum) {
+    public Boolean Train(Bitmap bitmap) {
+        Double d = 1.0 / trainCounter;
         for (int i = 0; i < _SIZE; i++) {
             for (int j = 0; j < _SIZE; j++) {
-                weight[i][j] = 0;
-                if (i < typeNum)
-                    weight[i][j] = 1;
+                //weight[i][j] += 2 * (source[i][j] - 0.5f) / countTrainig;
+                weight[i][j] = (double)bitmap.getPixel(j, i);
             }
         }
         return true;
     }
+
 
     public Integer getNeuronId() {
         return neuronId;
@@ -63,5 +72,9 @@ public class Neuron {
 
     public void setNeuronId(Integer neuronId) {
         this.neuronId = neuronId;
+    }
+
+    public static void restartCounter() {
+        idCounter = 0;
     }
 }

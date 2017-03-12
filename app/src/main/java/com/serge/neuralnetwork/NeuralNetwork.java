@@ -1,6 +1,8 @@
 package com.serge.neuralnetwork;
 
+import android.graphics.Bitmap;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -10,30 +12,37 @@ import java.util.ArrayList;
 
 public class NeuralNetwork {
     private ArrayList<Neuron> neurons;
-    private Integer idCounter = 0;
 
     public NeuralNetwork() {
+        Neuron.restartCounter();
         neurons = new ArrayList<>();
-        neurons.add(new Neuron(idCounter, 0));
-        idCounter++;
-        neurons.add(new Neuron(idCounter, 5));
-        idCounter++;
-        neurons.add(new Neuron(idCounter, 10));
-        idCounter++;
-        neurons.add(new Neuron(idCounter, 15));
-        idCounter++;
     }
     
-    public void FindBestSolution(Integer[][] source) {
+    public Integer FindBestSolution(Double[][] source) {
         Integer bestNeuronId = 0;
-        Integer bestSolution = 0;
+        Double bestSolution = 0.0;
         for (Neuron neuron: neurons) {
-            Integer currentSolution = neuron.Compare(source);
+            Double currentSolution = neuron.Compare(source);
             if (bestSolution < currentSolution) {
                 bestSolution = currentSolution;
                 bestNeuronId = neuron.getNeuronId();
             }
         }
         Log.d("Neuron", bestNeuronId.toString());
+        return bestNeuronId;
+    }
+
+    public void addNeuron()
+    {
+        neurons.add(new Neuron());
+    }
+
+    public void TrainNeuron(int id, Double[][] arr)
+    {
+        if(id > neurons.size())
+            return;
+        if(id == neurons.size())
+            addNeuron();
+        neurons.get(id).Train(arr);
     }
 }
