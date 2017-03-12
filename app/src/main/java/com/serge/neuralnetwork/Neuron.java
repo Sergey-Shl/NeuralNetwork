@@ -3,6 +3,10 @@ package com.serge.neuralnetwork;
 import android.graphics.Bitmap;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import javax.xml.transform.Source;
 
 /**
@@ -10,7 +14,7 @@ import javax.xml.transform.Source;
  */
 
 public class Neuron {
-    private final Integer _SIZE = 16;
+    private static final Integer _SIZE = 16;
     private static Integer idCounter = 0;
 
     private Double[][] weight;
@@ -41,6 +45,18 @@ public class Neuron {
         neuronName = name;
     }
 
+    public Neuron(Integer neuronId, String neuronName, Double[][] weight, Integer trainCounter) {
+        this.neuronId = neuronId;
+        this.neuronName = neuronName;
+        this.weight = new Double[_SIZE][_SIZE];
+        for (int i = 0; i < _SIZE; i++) {
+            for (int j = 0; j < _SIZE; j++) {
+                this.weight[i][j] = weight[i][j];
+            }
+        }
+        this.trainCounter = trainCounter;
+    }
+
     double Compare(Double[][] source) {
         Double result = 0.0;
         for (int i = 0; i < _SIZE; i++) {
@@ -53,7 +69,6 @@ public class Neuron {
 
 
     public Boolean Train(Double[][] source) {
-        //Double d = 1.0 / trainCounter;
         trainCounter++;
         for (int i = 0; i < _SIZE; i++) {
             for (int j = 0; j < _SIZE; j++) {
@@ -62,7 +77,6 @@ public class Neuron {
                     weight[i][j] = 1.0;
                 if (weight[i][j] < 0.0)
                     weight[i][j] = 0.0;
-                //weight[i][j] = source[i][j];
             }
         }
         return true;
@@ -80,7 +94,23 @@ public class Neuron {
         return neuronName;
     }
 
+    public static Integer getNeuronSize() { return _SIZE; };
+
     public void setNeuronId(Integer neuronId) {
         this.neuronId = neuronId;
     }
+
+    @Override
+    public String toString() {
+        String arr = "";
+        for (int i = 0; i < _SIZE; i++) {
+            arr += Arrays.toString(weight[i]) + "\n";
+        }
+        return "Neuron" +
+                "\n" + neuronId +
+                "\n" + neuronName +
+                "\n" + arr +
+                "\n" + trainCounter + "\n";
+    }
+
 }
