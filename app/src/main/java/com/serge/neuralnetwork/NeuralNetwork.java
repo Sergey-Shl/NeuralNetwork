@@ -38,7 +38,7 @@ public class NeuralNetwork {
                 bestNeuronId = neuron.getNeuronId();
             }
         }
-        Log.d("Neuron", bestNeuronId.toString());
+        Log.d("Neuron", "Name = \'" + neurons.get(bestNeuronId).getNeuronName() + "\' Id = " + bestNeuronId.toString());
         return bestNeuronId;
     }
 
@@ -136,6 +136,7 @@ public class NeuralNetwork {
                 else
                     counter = 0;
             }
+            Toast.makeText(context, "Loading complete", Toast.LENGTH_SHORT);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

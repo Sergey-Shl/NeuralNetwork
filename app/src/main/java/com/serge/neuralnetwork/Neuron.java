@@ -70,7 +70,7 @@ public class Neuron {
 
 
     public Boolean Train(Double[][] input) {
-        Log.d("Training", "Good. id = " + this.neuronId);
+        Log.d("Training", "Good. Name = \'" + neuronName + "\' id = " + this.neuronId);
         trainCounter++;
         for (int i = 0; i < _SIZE; i++) {
             for (int j = 0; j < _SIZE; j++) {
