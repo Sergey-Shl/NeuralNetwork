@@ -55,6 +55,7 @@ public class Neuron {
             }
         }
         this.trainCounter = trainCounter;
+        idCounter++;
     }
 
     double Compare(Double[][] input) {
@@ -69,12 +70,14 @@ public class Neuron {
 
 
     public Boolean Train(Double[][] input) {
+        Log.d("Training", "Good. id = " + this.neuronId);
         trainCounter++;
         for (int i = 0; i < _SIZE; i++) {
             for (int j = 0; j < _SIZE; j++) {
-                //weight[i][j] += 2 * (input[i][j] - 0.5) / trainCounter;
-                if (trainCounter > 1)
+                if (trainCounter > 1) {
                     weight[i][j] = ((weight[i][j] * (trainCounter - 1)) + input[i][j]) / trainCounter;
+                    //weight[i][j] += 2 * (input[i][j] - 0.5) / trainCounter;
+                }
                 else
                     weight[i][j] = input[i][j];
                 /*if (weight[i][j] > 1.0)

@@ -57,7 +57,7 @@
             android:text="Id:"/>
 
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:text="0"
             android:id="@+id/neuron_id"/>
@@ -68,7 +68,7 @@
             android:text="Name:"/>
 
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:text="name"
             android:id="@+id/neuron_name"/>
@@ -85,11 +85,29 @@
                 android:layout_height="250dp"
                 android:id="@+id/drawing_view"/>
 
-                <ImageView
-                     android:layout_width="70dp"
-                     android:layout_height="70dp"
-                     android:id="@+id/image_view"
-                     android:background="@color/colorAccent"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:id="@+id/image_view"
+                        android:background="@color/colorAccent"/>
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="True"
+                        android:id="@+id/btn_true"
+                        android:layout_gravity="center"/>
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="False"
+                        android:id="@+id/btn_false"
+                        android:layout_gravity="center"/>
+                </LinearLayout>
         </LinearLayout>
 
 </LinearLayout>

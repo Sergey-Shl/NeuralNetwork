@@ -107,6 +107,7 @@ public class NeuralNetwork {
             String name = "";
             Double[][] array = new Double[_SIZE][_SIZE];
             Integer trainingCounter = 0;
+            Neuron.restartCounter();
             while ((str = bufferedReader.readLine()) != null) {
                 switch (counter) {
                     case 1:
