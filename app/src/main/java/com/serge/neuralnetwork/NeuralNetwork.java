@@ -27,6 +27,8 @@ public class NeuralNetwork {
     }
     
     public Integer FindBestSolution(Double[][] input) {
+        if (neurons.size() == 0)
+            return -1;
         Integer bestNeuronId = 0;
         Double bestSolution = 0.0;
         for (Neuron neuron: neurons) {

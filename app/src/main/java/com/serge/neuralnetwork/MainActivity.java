@@ -66,7 +66,10 @@ public class MainActivity extends AppCompatActivity {
 
                     Integer id = neuralNetwork.FindBestSolution(EditImage.convertBitmapToArr(bm));
                     drawingView.Clear();
-                    Toast.makeText(getApplicationContext(), neuralNetwork.getNeuronName(id), Toast.LENGTH_SHORT).show();
+                    if (id == -1)
+                        Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(getApplicationContext(), neuralNetwork.getNeuronName(id), Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.btn4:
                     neuralNetwork.Save(getApplicationContext());
