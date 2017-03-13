@@ -57,26 +57,26 @@ public class Neuron {
         this.trainCounter = trainCounter;
     }
 
-    double Compare(Double[][] source) {
+    double Compare(Double[][] input) {
         Double result = 0.0;
         for (int i = 0; i < _SIZE; i++) {
             for (int j = 0; j < _SIZE; j++) {
-                result += 1 - Math.abs(weight[i][j] - source[i][j]);
+                result += 1 - Math.abs(weight[i][j] - input[i][j]);
             }
         }
         return result;
     }
 
 
-    public Boolean Train(Double[][] source) {
+    public Boolean Train(Double[][] input) {
         trainCounter++;
         for (int i = 0; i < _SIZE; i++) {
             for (int j = 0; j < _SIZE; j++) {
-                //weight[i][j] += 2 * (source[i][j] - 0.5) / trainCounter;
+                //weight[i][j] += 2 * (input[i][j] - 0.5) / trainCounter;
                 if (trainCounter > 1)
-                    weight[i][j] = (weight[i][j] + source[i][j]) * (trainCounter - 1) / (trainCounter);
+                    weight[i][j] = ((weight[i][j] * (trainCounter - 1)) + input[i][j]) / trainCounter;
                 else
-                    weight[i][j] = source[i][j];
+                    weight[i][j] = input[i][j];
                 /*if (weight[i][j] > 1.0)
                     weight[i][j] = 1.0;
                 if (weight[i][j] < 0.0)

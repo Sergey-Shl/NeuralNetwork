@@ -26,11 +26,11 @@ public class NeuralNetwork {
         neurons = new ArrayList<>();
     }
     
-    public Integer FindBestSolution(Double[][] source) {
+    public Integer FindBestSolution(Double[][] input) {
         Integer bestNeuronId = 0;
         Double bestSolution = 0.0;
         for (Neuron neuron: neurons) {
-            Double currentSolution = neuron.Compare(source);
+            Double currentSolution = neuron.Compare(input);
             if (bestSolution < currentSolution) {
                 bestSolution = currentSolution;
                 bestNeuronId = neuron.getNeuronId();
