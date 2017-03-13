@@ -72,11 +72,15 @@ public class Neuron {
         trainCounter++;
         for (int i = 0; i < _SIZE; i++) {
             for (int j = 0; j < _SIZE; j++) {
-                weight[i][j] += 2 * (source[i][j] - 0.5) / trainCounter;
-                if (weight[i][j] > 1.0)
+                //weight[i][j] += 2 * (source[i][j] - 0.5) / trainCounter;
+                if (trainCounter > 1)
+                    weight[i][j] = (weight[i][j] + source[i][j]) * (trainCounter - 1) / (trainCounter);
+                else
+                    weight[i][j] = source[i][j];
+                /*if (weight[i][j] > 1.0)
                     weight[i][j] = 1.0;
                 if (weight[i][j] < 0.0)
-                    weight[i][j] = 0.0;
+                    weight[i][j] = 0.0;*/
             }
         }
         return true;
