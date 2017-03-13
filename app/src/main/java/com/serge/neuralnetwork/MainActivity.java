@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.btn2:
                     bm = drawingView.getDrawingCache();
                     bm = EditImage.TrimBitmap(bm);
-                    bm = EditImage.getResizedBitmap(bm, 16, 16);
+                    bm = EditImage.getResizedBitmap(bm, Neuron.getNeuronSize(), Neuron.getNeuronSize());
                     imageView.setImageBitmap(bm);
 
                     neuralNetwork.TrainNeuron(Integer.parseInt(String.valueOf(editText.getText())), EditImage.convertBitmapToArr(bm), String.valueOf(textView.getText()));
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.btn3:
                     bm = drawingView.getDrawingCache();
                     bm = EditImage.TrimBitmap(bm);
-                    bm = EditImage.getResizedBitmap(bm, 16, 16);
+                    bm = EditImage.getResizedBitmap(bm, Neuron.getNeuronSize(), Neuron.getNeuronSize());
                     imageView.setImageBitmap(bm);
 
                     Integer id = neuralNetwork.FindBestSolution(EditImage.convertBitmapToArr(bm));

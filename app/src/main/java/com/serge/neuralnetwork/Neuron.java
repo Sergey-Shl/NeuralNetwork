@@ -14,7 +14,7 @@ import javax.xml.transform.Source;
  */
 
 public class Neuron {
-    private static final Integer _SIZE = 16;
+    private static final Integer _SIZE = 128;
     private static Integer idCounter = 0;
 
     private Double[][] weight;
